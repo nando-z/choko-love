@@ -1,35 +1,37 @@
 import turtle
 import math
 
-# إعداد الشاشة
-screen = turtle.Screen()
-screen.bgcolor("black")
-screen.title("JTM CHOKO")
+# Function to draw the heart shape
+def draw_heart():
+    turtle.speed(0)
+    turtle.color("red")
+    turtle.begin_fill()
+    for t in range(360):
+        angle = math.radians(t)
+        x = 16 * math.sin(angle)**3
+        y = 13 * math.cos(angle) - 5 * math.cos(2 * angle) - 2 * math.cos(3 * angle) - math.cos(4 * angle)
+        turtle.goto(x * 20, y * 20)  # Scale the heart
+    turtle.end_fill()
 
-# إعداد القلم
-pen = turtle.Turtle()
-pen.color("red")
-pen.hideturtle()
-pen.speed(5)
+# Function to write text inside the heart
+def write_text():
+    turtle.penup()
+    turtle.goto(0, -50)
+    turtle.color("white")
+    turtle.write("JTM CHOKO", align="center", font=("Arial", 24, "bold"))
+    turtle.hideturtle()
 
-# رسم القلب باستخدام معادلة رياضية
-pen.up()
-pen.goto(0, -200)
-pen.down()
-pen.begin_fill()
+# Main function to set up the Turtle screen
+def main():
+    screen = turtle.Screen()
+    screen.setup(width=800, height=800)
+    screen.bgcolor("black")
+    screen.title("Heart Shape with Turtle")
+    turtle.penup()
+    turtle.goto(0, 0)
+    draw_heart()
+    write_text()
+    screen.mainloop()
 
-for t in range(0, 360, 1):
-    x = 16 * (math.sin(math.radians(t))**3)
-    y = 13 * math.cos(math.radians(t)) - 5 * math.cos(2 * math.radians(t)) - 2 * math.cos(3 * math.radians(t)) - math.cos(4 * math.radians(t))
-    pen.goto(x * 10, y * 10 - 100)
-
-pen.end_fill()
-
-# كتابة النص "JTM CHOKO"
-pen.up()
-pen.goto(-70, 30)
-pen.color("white")
-pen.write("JTM CHOKO", font=("Arial", 24, "bold"))
-
-# إغلاق الشاشة عند النقر
-screen.exitonclick()
+if __name__ == "__main__":
+    main()
